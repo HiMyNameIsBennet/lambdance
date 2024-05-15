@@ -1,3 +1,6 @@
+import os
+
+
 def bpm_to_fps(bpm):
     # we want to flicker, so multiply times 2
     return (bpm / 60) * 2
@@ -6,3 +9,7 @@ def bpm_to_fps(bpm):
 def fetch_bpm():
     # dummy for now
     return 140
+
+
+def fetch_images():
+    return os.listdir("img")

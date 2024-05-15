@@ -17,17 +17,25 @@ running = True
 
 flicker = True
 
-# place image in img/ directory
-img = pygame.image.load("img/image.png")
+# place images in img/ directory
+img = []
+for i in util.fetch_images():
+    img.append(pygame.image.load(f"img/{i}"))
 
+image_amt = len(img)
+image_idx = 0
 
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
+
     if flicker:
-        screen.blit(img, (CENTER[0] - (img.get_width() / 2), CENTER[1] - (img.get_height() / 2)))
+        screen.blit(img[image_idx], (CENTER[0] - (img[image_idx].get_width() / 2), 
+                                     CENTER[1] - (img[image_idx].get_height() / 2)))
+        
+        image_idx = (image_idx + 1) % image_amt
     else:
         screen.fill("black")
 
