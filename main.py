@@ -1,6 +1,7 @@
 import pygame
 
 import lib.util as util
+import lib.spotify as spotify
 
 
 # pygame setup
@@ -24,6 +25,11 @@ for i in util.fetch_images():
 
 image_amt = len(img)
 image_idx = 0
+
+
+while spotify.request_access_token() != True:
+    pass
+
 
 while running:
     for event in pygame.event.get():
