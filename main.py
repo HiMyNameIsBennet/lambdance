@@ -2,6 +2,7 @@ import pygame
 
 import lib.util as util
 import lib.spotify as spotify
+import lib.auth as auth
 
 
 # pygame setup
@@ -27,9 +28,10 @@ image_amt = len(img)
 image_idx = 0
 
 
-while spotify.request_access_token() != True:
+while auth.request_spotify_access_token() != True:
     pass
 
+print("Client authentication successful!")
 
 while running:
     for event in pygame.event.get():
