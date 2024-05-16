@@ -1,4 +1,6 @@
 import os
+import string
+import random
 
 
 def bpm_to_fps(bpm):
@@ -13,3 +15,8 @@ def fetch_bpm():
 
 def fetch_images():
     return os.listdir("img")
+
+
+def generate_random_string(length):
+    # see https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits
+    return ''.join(random.SystemRandom().choice(string.ascii_uppercase) for _ in range(length))

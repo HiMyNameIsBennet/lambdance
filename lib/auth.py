@@ -1,14 +1,20 @@
 import json
 import base64
 import requests
+import webbrowser
+
+import lib.util as util
 
 
 TOKEN = ""
+CLIENT_ID = ""
 
 def request_spotify_access_token():
     global TOKEN
+    global CLIENT_ID
 
     creds = read_spotify_client_credentials()
+    CLIENT_ID = creds[0]
     url = "https://accounts.spotify.com/api/token"
 
     creds_formatted = f"{creds[0]}:{creds[1]}"
@@ -46,3 +52,23 @@ def read_spotify_client_credentials():
     f.close()
 
     return creds.split("\n")
+
+
+def request_user_authorization():
+    payload = {
+        "client_id": CLIENT_ID,
+        "response_type": "code",
+        "redirect_uri": "https://bennet.sh/repos/lambdance",
+        "state": util.generate_random_string(16)
+    }
+
+    root_url = "https://accounts.spotify.com/authorize?"
+
+    params = ""
+    prefix = ""
+    for (key, val) in payload.items():
+        params = params + f"{prefix}{key}={val}"
+        # do not add a prefix on first parameter but on all consecutive
+        prefix = "&"
+
+    webbrowser.open(root_url + params)
