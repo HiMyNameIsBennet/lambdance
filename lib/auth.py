@@ -9,6 +9,7 @@ import lib.conn as conn
 
 TOKEN = ""
 CLIENT_ID = ""
+USER_TOKEN = ""
 
 def request_spotify_access_token():
     global TOKEN
@@ -59,11 +60,12 @@ def read_spotify_client_credentials():
 # THIS IS INSECURE AND FOR DEV PURPOSES ONLY
 # https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
 def request_user_authorization():
+    state = util.generate_random_string(16)
     payload = {
         "client_id": CLIENT_ID,
         "response_type": "code",
         "redirect_uri": "http://localhost:8888",
-        "state": util.generate_random_string(16)
+        "state": state
     }
 
     root_url = "https://accounts.spotify.com/authorize?"
@@ -77,4 +79,11 @@ def request_user_authorization():
 
     webbrowser.open(root_url + params)
 
-    conn.launch_callback_server()
+    user_code, return_state = conn.launch_callback_server()
+
+    if return_state != state:
+        return False
+    
+    USER_TOKEN = user_code
+
+    return True

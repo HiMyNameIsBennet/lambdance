@@ -34,7 +34,10 @@ while auth.request_spotify_access_token() != True:
 print("Client authentication successful!")
 
 
-auth.request_user_authorization()
+while auth.request_user_authorization() != True:
+    pass
+
+print("User credentials fetched!")
 
 
 while running:
