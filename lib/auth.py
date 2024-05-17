@@ -4,6 +4,7 @@ import requests
 import webbrowser
 
 import lib.util as util
+import lib.conn as conn
 
 
 TOKEN = ""
@@ -54,11 +55,14 @@ def read_spotify_client_credentials():
     return creds.split("\n")
 
 
+# REWRITE THIS TO USE PKCE FLOW
+# THIS IS INSECURE AND FOR DEV PURPOSES ONLY
+# https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
 def request_user_authorization():
     payload = {
         "client_id": CLIENT_ID,
         "response_type": "code",
-        "redirect_uri": "https://bennet.sh/repos/lambdance",
+        "redirect_uri": "http://localhost:8888",
         "state": util.generate_random_string(16)
     }
 
@@ -72,3 +76,5 @@ def request_user_authorization():
         prefix = "&"
 
     webbrowser.open(root_url + params)
+
+    conn.launch_callback_server()
