@@ -60,6 +60,8 @@ def read_spotify_client_credentials():
 # THIS IS INSECURE AND FOR DEV PURPOSES ONLY
 # https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
 def request_user_authorization():
+    global USER_TOKEN
+
     state = util.generate_random_string(16)
     payload = {
         "client_id": CLIENT_ID,
