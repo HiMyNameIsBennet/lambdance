@@ -37,7 +37,13 @@ print("Client authentication successful!")
 while auth.request_user_authorization() != True:
     pass
 
-print("User credentials fetched!")
+print("User authorization granted!")
+
+
+while auth.fetch_user_access_token() != True:
+    pass
+
+print("User token fetched!")
 
 
 while running:
