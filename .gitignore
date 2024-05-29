@@ -1,0 +1,8 @@
+.vscode/
+.venv/
+
+creds
+
+__pycache__/
+
+img/*
