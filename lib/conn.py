@@ -7,6 +7,7 @@ def launch_callback_server():
     host = "127.0.0.1"
     port = 8888
 
+    # how do i best handle this failing?
     server.bind((host, port))
 
     server.listen()
@@ -16,6 +17,11 @@ def launch_callback_server():
     client, _ = server.accept()
     
     rec = client.recv(4096).decode("ascii").split("\r\n")
+
+    # TODO:
+    # don't forget to implement a way to detect if this >fails<
+    # maybe just check for the word "error" being a substring
+    # see https://developer.spotify.com/documentation/web-api/tutorials/code-flow
 
     # find a way to extract this stuff cleaner
     return_creds_string = rec[0].split("?")[1]

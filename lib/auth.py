@@ -13,6 +13,7 @@ CLIENT_SECRET = ""
 USER_TOKEN = ""
 USER_CODE = ""
 
+
 def request_spotify_access_token():
     global CLIENT_TOKEN
 
@@ -67,11 +68,13 @@ def request_user_authorization():
     global USER_CODE
 
     state = util.generate_random_string(16)
+    scope = "user-read-currently-playing"
     payload = {
         "client_id": CLIENT_ID,
         "response_type": "code",
         "redirect_uri": "http://localhost:8888",
-        "state": state
+        "state": state,
+        "scope": scope
     }
 
     root_url = "https://accounts.spotify.com/authorize?"

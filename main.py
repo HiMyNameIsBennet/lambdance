@@ -46,6 +46,9 @@ while auth.fetch_user_access_token() != True:
 print("User token fetched!")
 
 
+bpm = spotify.fetch_current_song_bpm()
+
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -70,7 +73,6 @@ while running:
 
 
     # this can be optimized
-    bpm = util.fetch_bpm()
     fps = util.bpm_to_fps(bpm)
     #
 

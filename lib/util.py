@@ -11,11 +11,6 @@ def bpm_to_fps(bpm):
     return (bpm / 60) * 2
 
 
-def fetch_bpm():
-    # dummy for now
-    return 140
-
-
 def fetch_images():
     return os.listdir("img")
 
